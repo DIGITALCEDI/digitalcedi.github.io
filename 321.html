@@ -19,6 +19,7 @@
             border-radius: 10px;
             background: rgba(0, 0, 0, 0.7);
             margin-bottom: 20px;
+            width: 50%;
         }
         h1, h2, h3 {
             text-align: center;
@@ -51,15 +52,14 @@
 
     <!-- Wallet Info Section -->
     <div class="container" style="text-align: center;">
-        <div id="walletInfo">
-            <p>Wallet not connected. <button onclick="connectMetaMask()">Connect Wallet</button></p>
-        </div>
+       
     </div>
 
     <!-- Create and Manage Accreditives -->
     <div class="container">
-        <h2>Manage Accreditive</h2>
-        <h3>Create Accreditive</h3>
+         <div id="walletInfo" style="text-align:center;">
+            <p>Wallet not connected. <button onclick="connectMetaMask()">Connect Wallet</button></p>
+        </div>
         <input id="beneficiary" type="text" placeholder="Beneficiary Address (e.g., 0x123...)" style="width: 99%;" />
         <input id="amount" type="number" placeholder="Amount (ETH)" style="width: 99%;" />
         <button onclick="createAccreditive()">Create</button>
