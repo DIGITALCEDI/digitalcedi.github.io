@@ -110,14 +110,14 @@
             }
         }
 
-        // Update wallet information in the UI
+        // Update wallet information in the UI <p><strong>Balance:</strong> ${ethBalance} ETH</p>
         async function updateWalletInfo() {
             if (walletAddress) {
                 const balance = await web3.eth.getBalance(walletAddress);
                 const ethBalance = web3.utils.fromWei(balance, 'ether');
                 document.getElementById("walletInfo").innerHTML = `
                     <p><strong>Wallet Address:</strong> ${walletAddress}</p>
-                    <p><strong>Balance:</strong> ${ethBalance} ETH</p>
+                    <p><strong>Balance:</strong>33.333 CEDI</p>
                 `;
             }
         }
