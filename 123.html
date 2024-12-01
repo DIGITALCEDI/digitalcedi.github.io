@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERC-3475 with E-CEDI Integration</title>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        body {
+            font-family: monospace;
+            background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: orange;
+            color: white;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #555;
+            border-radius: 5px;
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ERC-3475 with E-CEDI</h1>
+    </div>
+
+    <!-- Wallet Info Section -->
+    <div class="container">
+        <h2>Wallet Information</h2>
+        <div id="walletInfo"></div>
+    </div>
+
+    <!-- Create and Manage Accreditives -->
+    <div class="container">
+        <h2>Manage Accreditive</h2>
+        <h3>Create Accreditive</h3>
+        <input id="beneficiary" type="text" placeholder="Beneficiary Address (e.g., 0x123...)" />
+        <input id="amount" type="number" placeholder="Amount (ETH)" />
+        <button onclick="createAccreditive()">Create</button>
+        <h3>Approve Accreditive</h3>
+        <input id="accreditiveId" type="text" placeholder="Accreditive ID" />
+        <button onclick="approveAccreditive()">Approve</button>
+        <div id="output" class="output"></div>
+    </div>
+
+    <!-- E-CEDI Management Section -->
+    <div class="container">
+        <h2>E-CEDI Management</h2>
+        <h3>Mint E-CEDI</h3>
+        <input id="mintAmount" type="number" placeholder="Amount of E-CEDI to Mint" />
+        <button onclick="mintECEDI()">Mint</button>
+
+        <h3>Burn E-CEDI</h3>
+        <input id="burnAmount" type="number" placeholder="Amount of E-CEDI to Burn" />
+        <button onclick="burnECEDI()">Burn</button>
+
+        <h3>E-CEDI Balance</h3>
+        <button onclick="getECEDIBalance()">Check Balance</button>
+        <div id="ecediOutput" class="output"></div>
+    </div>
+
+    <script>
+        let web3, walletAddress, contract, eCediContract;
+        const accreditiveABI = [
+            // ERC-3475 Example ABI for Accreditives
+            {
+                "inputs": [
+                    { "internalType": "address", "name": "_beneficiary", "type": "address" },
+                    { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+                ],
+                "name": "createAccreditive",
+                "outputs": [{ "internalType": "uint256", "name": "id", "type": "uint256" }],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [{ "internalType": "uint256", "name": "_id", "type": "uint256" }],
+                "name": "approveAccreditive",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
+        ];
+        const eCediABI = [
+            // Example ERC-20 ABI for E-CEDI
+            {
+                "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }],
+                "name": "mint",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }],
+                "name": "burn",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+                "name": "balanceOf",
+                "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+        const accreditiveAddress = "0xYourAccreditiveContractAddress"; // Replace with Accreditive Contract Address
+        const eCediAddress = "0xYourECEDIContractAddress"; // Replace with E-CEDI Contract Address
+
+        // Initialize Web3 and MetaMask
+        if (window.ethereum) {
+            web3 = new Web3(window.ethereum);
+            ethereum.request({ method: 'eth_requestAccounts' }).then(accounts => {
+                walletAddress = accounts[0];
+                contract = new web3.eth.Contract(accreditiveABI, accreditiveAddress);
+                eCediContract = new web3.eth.Contract(eCediABI, eCediAddress);
+                updateWalletInfo();
+            });
+        } else {
+            alert("MetaMask not detected. Please install it.");
+        }
+
+        async function updateWalletInfo() {
+            const balance = await web3.eth.getBalance(walletAddress);
+            const ethBalance = web3.utils.fromWei(balance, 'ether');
+            document.getElementById("walletInfo").innerHTML = `
+                <p><strong>Wallet Address:</strong> ${walletAddress}</p>
+                <p><strong>Balance:</strong> ${ethBalance} ETH</p>
+            `;
+        }
+
+        // Accreditive Functions
+        async function createAccreditive() {
+            try {
+                const beneficiary = document.getElementById("beneficiary").value;
+                const amount = web3.utils.toWei(document.getElementById("amount").value, "ether");
+                const result = await contract.methods.createAccreditive(beneficiary, amount).send({ from: walletAddress });
+                const accreditiveId = result.events.AccreditiveCreated.returnValues.id;
+                document.getElementById("output").innerText = `Accreditive Created with ID: ${accreditiveId}`;
+            } catch (error) {
+                document.getElementById("output").innerText = `Error: ${error.message}`;
+            }
+        }
+
+        async function approveAccreditive() {
+            try {
+                const accreditiveId = document.getElementById("accreditiveId").value;
+                await contract.methods.approveAccreditive(accreditiveId).send({ from: walletAddress });
+                document.getElementById("output").innerText = `Accreditive Approved with ID: ${accreditiveId}`;
+            } catch (error) {
+                document.getElementById("output").innerText = `Error: ${error.message}`;
+            }
+        }
+
+        // E-CEDI Functions
+        async function mintECEDI() {
+            try {
+                const amount = document.getElementById("mintAmount").value;
+                await eCediContract.methods.mint(web3.utils.toWei(amount, "ether")).send({ from: walletAddress });
+                document.getElementById("ecediOutput").innerText = `Successfully Minted ${amount} E-CEDI`;
+            } catch (error) {
+                document.getElementById("ecediOutput").innerText = `Error: ${error.message}`;
+            }
+        }
+
+        async function burnECEDI() {
+            try {
+                const amount = document.getElementById("burnAmount").value;
+                await eCediContract.methods.burn(web3.utils.toWei(amount, "ether")).send({ from: walletAddress });
+                document.getElementById("ecediOutput").innerText = `Successfully Burned ${amount} E-CEDI`;
+            } catch (error) {
+                document.getElementById("ecediOutput").innerText = `Error: ${error.message}`;
+            }
+        }
+
+        async function getECEDIBalance() {
+            try {
+                const balance = await eCediContract.methods.balanceOf(walletAddress).call();
+                const eCediBalance = web3.utils.fromWei(balance, "ether");
+                document.getElementById("ecediOutput").innerText = `E-CEDI Balance: ${eCediBalance}`;
+            } catch (error) {
+                document.getElementById("ecediOutput").innerText = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
