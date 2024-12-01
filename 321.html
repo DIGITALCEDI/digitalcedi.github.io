@@ -104,7 +104,7 @@
                 alert("MetaMask not detected. Please install it.");
             }
         }
-
+        // <p><strong>Balance:</strong>33.333 CEDI</p>
         // Update wallet information in the UI <p><strong>Balance:</strong> ${ethBalance} ETH</p>
         async function updateWalletInfo() {
             if (walletAddress) {
@@ -112,7 +112,7 @@
                 const ethBalance = web3.utils.fromWei(balance, 'ether');
                 document.getElementById("walletInfo").innerHTML = `
                     <p><strong>Wallet Address:</strong> ${walletAddress}</p>
-                    <p><strong>Balance:</strong>33.333 CEDI</p>
+                    
                 `;
             }
         }
