@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>IPFS CID: Сравнение стратегий доступа, хранения и квантовой защиты</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Скрываем скроллбар для всей страницы, но прокрутка работает */
+        body {
+            background: #f8fafc;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #0f172a;
+            overflow-y: auto;   /* прокрутка есть */
+        }
+
+        /* Скрываем стандартный скроллбар в Webkit (Chrome, Edge, Safari) */
+        body::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            background: transparent;
+        }
+        
+        /* Для Firefox: убираем полосу прокрутки, но сохраняем функционал */
+        body {
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        h1 i {
+            color: #3b82f6;
+            font-size: 2rem;
+        }
+
+        .sub {
+            color: #334155;
+            border-left: 3px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 1rem 0 1.8rem 0;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        /* таблица с горизонтальным скроллом, но скрытым скроллбаром */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            height: 0;
+            background: transparent;
+        }
+        
+        .table-wrapper {
+            scrollbar-width: none; /* Firefox */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            min-width: 1100px;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 0.75rem;
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #0c4a6e;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+        }
+
+        td {
+            padding: 0.9rem 0.75rem;
+            border-bottom: 1px solid #eef2f6;
+            vertical-align: top;
+            background-color: white;
+        }
+
+        tr:hover td {
+            background-color: #fafcff;
+        }
+
+        .category-row {
+            background-color: #f8fafc;
+        }
+
+        .category-row td {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #1e293b;
+            border-top: 1px solid #dce3ec;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eef2ff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #1e40af;
+            white-space: nowrap;
+        }
+
+        i.icon-col {
+            width: 1.6rem;
+            color: #3b82f6;
+            margin-right: 0.3rem;
+        }
+
+        .rating-high {
+            color: #16a34a;
+            font-weight: 500;
+        }
+        .rating-mid {
+            color: #eab308;
+        }
+        .rating-low {
+            color: #dc2626;
+        }
+
+        .complex-high {
+            color: #dc2626;
+        }
+        .complex-mid {
+            color: #f97316;
+        }
+        .complex-low {
+            color: #22c55e;
+        }
+
+        .footnote {
+            margin-top: 2rem;
+            background: #f1f5f9;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem;
+            font-size: 0.75rem;
+            color: #334155;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        i.fa, i.far, i.fas {
+            margin-right: 4px;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem;
+            }
+            td, th {
+                padding: 0.7rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        <i class="fas fa-cubes"></i> 
+        CID в IPFS: браузерный доступ, сохранение и постквантовая защита
+    </h1>
+    <div class="sub">
+        <i class="fas fa-chart-line"></i> Сравнение подходов — от публичных шлюзов до квантово-устойчивых IPNS / блокчейна.
+        <i class="fas fa-eye-slash" style="margin-left: 12px;"></i> Скроллбар скрыт, но прокрутка работает.
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%"><i class="fas fa-tachometer-alt"></i> Решение</th>
+                    <th style="width: 22%"><i class="fas fa-lightbulb"></i> Ключевая идея</th>
+                    <th style="width: 12%"><i class="fas fa-shield-alt"></i> Надёжность</th>
+                    <th style="width: 12%"><i class="fas fa-rocket"></i> Скорость / Затраты</th>
+                    <th style="width: 12%"><i class="fas fa-lock"></i> Безопасность (PQC)</th>
+                    <th style="width: 10%"><i class="fas fa-microchip"></i> Сложность</th>
+                    <th style="width: 14%"><i class="fas fa-thumbs-up"></i> Рекомендация</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ГРУППА 1: ПОЛУЧЕНИЕ CID ИЗ БРАУЗЕРА -->
+                <tr class="category-row"><td colspan="7"><i class="fas fa-globe icon-col"></i> <strong>I. ПОЛУЧЕНИЕ CID ИЗ ЛЮБОГО БРАУЗЕРА</strong></td></tr>
+                <tr>
+                    <td><i class="fas fa-cloud-upload-alt"></i> Публичные шлюзы (ipfs.io)</td>
+                    <td>Бесплатный доступ «из коробки» через HTTPS gateway</td>
+                    <td class="rating-low"><i class="fas fa-exclamation-triangle"></i> Низкая (общая нагрузка, точки отказа)</td>
+                    <td>🟡 Средняя (кеш зависит от популярности)</td>
+                    <td>🔒 Низкая (полное доверие оператору)</td>
+                    <td class="complex-low"><i class="fas fa-seedling"></i> Низкая</td>
+                    <td>Только тесты / прототипы</td>
+                </tr>
+                <tr>
+                    <td><i class="fab fa-cloudflare"></i> Cloudflare IPFS gateway</td>
+                    <td>Глобальная CDN, высокая производительность</td>
+                    <td class="rating-high"><i class="fas fa-check-circle"></i> Высокая (регистрация, но стабильно)</td>
+                    <td class="rating-high"><i class="fas fa-bolt"></i> Очень высокая</td>
+                    <td>🔒 Низкая (централизация)</td>
+                    <td class="complex-low">Низкая</td>
+                    <td>Быстрый доступ к публичным данным</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-road"></i> Trustless gateway (w3s.link)</td>
+                    <td>Клиент проверяет хэш — исключает подмену от шлюза</td>
+                    <td class="rating-high"><i class="fas fa-dice-d6"></i> Очень высокая (верификация на клиенте)</td>
+                    <td class="rating-high">Высокая (range-запросы)</td>
+                    <td class="rating-high">🔒 Высокая (криптографическая проверка)</td>
+                    <td class="complex-mid">Средняя</td>
+                    <td><span class="badge"><i class="fas fa-star"></i> Production</span></td>
+                </tr>
+                <tr>
+                    <td><i class="fab fa-chrome"></i> Service Worker шлюз (inbrowser.link)</td>
+                    <td>P2P напрямую из браузера без центрального сервера</td>
+                    <td class="rating-high">Высокая (устойчив к цензуре)</td>
+                    <td class="rating-high">Высокая (бенчмарки ProbeLab)</td>
+                    <td class="rating-high">🔒 Очень высокая (нет посредника)</td>
+                    <td class="complex-high">Высокая</td>
+                    <td>Максимальная децентрализация</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-brain"></i> ipfs-smart-gateway</td>
+                    <td>Автоматический failover + выбор быстрейшего шлюза</td>
+                    <td class="rating-high">Очень высокая (отказоустойчивость)</td>
+                    <td class="rating-high">🚀 Максимальная</td>
+                    <td>🔒 Низкая (зависит от выбранного шлюза)</td>
+                    <td class="complex-mid">Средняя</td>
+                    <td>Для продакшна, где критична скорость</td>
+                </tr>
+
+                <!-- ГРУППА 2: СОХРАНЕНИЕ CID И ДАННЫХ -->
+                <tr class="category-row"><td colspan="7"><i class="fas fa-database"></i> <strong>II. СОХРАНЕНИЕ CID (пининг, долговременность)</strong></td></tr>
+                <tr>
+                    <td><i class="fas fa-pin"></i> Пиннинг‑сервисы (Pinata, Lighthouse)</td>
+                    <td>Провайдер хранит данные на своих узлах IPFS</td>
+                    <td class="rating-high">Высокая (SLA, но централизация)</td>
+                    <td>💰 Низкие затраты (есть бесплатный тариф)</td>
+                    <td>🔒 Средняя (доверие провайдеру)</td>
+                    <td class="complex-low">Низкая</td>
+                    <td>Старт проектов, малые объёмы</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-network-wired"></i> IPFS Cluster</td>
+                    <td>Собственная сеть узлов с репликацией</td>
+                    <td class="rating-high">🚀 Очень высокая (полный контроль)</td>
+                    <td>💸 Высокие (обслуживание серверов)</td>
+                    <td class="rating-high">🔒 Высокая (ваши ключи)</td>
+                    <td class="complex-high">Высокая</td>
+                    <td>Enterprise, uptime 99.99%</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-file-signature"></i> Filecoin (блокчейн-контракты)</td>
+                    <td>Экономическое стимулирование майнеров хранить данные</td>
+                    <td class="rating-high">Очень высокая (много независимых узлов)</td>
+                    <td>💰💰 Высокие (плата за хранение + retrieval)</td>
+                    <td>🔒 Высокая (криптоэкономика)</td>
+                    <td class="complex-high">Высокая</td>
+                    <td>Архивы, долгосрок >5 лет</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-link"></i> Локальное хранилище + <br>CID в JSON / SQLite</td>
+                    <td>Храните хэши только у себя на диске</td>
+                    <td class="rating-low">Низкая (единая точка отказа)</td>
+                    <td>🟢 Нулевые (локально)</td>
+                    <td>🔒 Средняя (зависит от шифрования диска)</td>
+                    <td class="complex-low">Низкая</td>
+                    <td>Только для личного использования</td>
+                </tr>
+
+                <!-- ГРУППА 3: КВАНТОВО-УСТОЙЧИВАЯ ЗАЩИТА -->
+                <tr class="category-row"><td colspan="7"><i class="fas fa-atom"></i> <strong>III. ПОСТКВАНТОВАЯ УСТОЙЧИВОСТЬ (PQC) ДЛЯ CID/IPNS</strong></td></tr>
+                <tr>
+                    <td><i class="fas fa-shield-virus"></i> Постквантовые подписи в IPNS<br>(CRYSTALS-Dilithium, SPHINCS+)</td>
+                    <td>Защита mapping «IPNS → CID» от квантовых атак на подписи</td>
+                    <td class="rating-high">Высокая (устойчивость к QC)</td>
+                    <td>📉 Низкая скорость, большой размер подписи</td>
+                    <td class="rating-high">🔒 Высокая (будущее)</td>
+                    <td class="complex-high">Высокая (интеграция)</td>
+                    <td>Для данных с длительным сроком жизни (>10 лет)</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-blender"></i> Гибридные схемы (PQC + классика)</td>
+                    <td>Одновременная верификация Ed25519 + PQC (плавный переход)</td>
+                    <td class="rating-high">Очень высокая (обратная совместимость)</td>
+                    <td>🟡 Средняя (накладные расходы выше классики)</td>
+                    <td class="rating-high">🔒 Высокая (защита на сегодня + завтра)</td>
+                    <td class="complex-high">Высокая</td>
+                    <td><span class="badge">Прагматичный выбор</span></td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-link"></i> Блокчейн на хэш-подписях (например, QRL)</td>
+                    <td>Регистрация CID в блокчейне, устойчивом к квантовым атакам (Winternitz, XMSS)</td>
+                    <td class="rating-high">Максимальная (математически доказано)</td>
+                    <td>🔴 Низкая пропускная способность, высокий объём</td>
+                    <td class="rating-high">🔒 Квантово-безопасно</td>
+                    <td class="complex-high">Очень высокая</td>
+                    <td>Специфичные квантово-защищённые реестры</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-coins"></i> Обычный блокчейн (Ethereum, Solana) — без PQC</td>
+                    <td>Хранение CID в смарт-контракте (подвержено Shor/Algoritm)</td>
+                    <td class="rating-high">Высокая (сегодня),<br>но 0 после QC</td>
+                    <td>💰💰 Затраты на газ, средняя скорость</td>
+                    <td class="rating-low">🔻 Уязвим (ECDSA/Ed25519)</td>
+                    <td class="complex-mid">Средняя</td>
+                    <td>Только если миграция возможна до эры QC</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-box-open"></i> «Холодное» локальное хранилище (офлайн)</td>
+                    <td>CID записан на бумаге/носителе, никакой сети и криптографии</td>
+                    <td class="rating-high">Абсолютная (физическая)</td>
+                    <td>🐢 Низкая (ручной ввод)</td>
+                    <td class="rating-high">🔒 Идеальная (без атак)</td>
+                    <td class="complex-low">Низкая (для одиночных хэшей)</td>
+                    <td>Мастер-ключи, архивные бэкапы</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footnote">
+        <span><i class="fas fa-chart-simple"></i> Легенда: <i class="fas fa-check-circle" style="color:#16a34a;"></i> высокая, 
+        <i class="fas fa-exclamation-triangle" style="color:#eab308;"></i> средняя, <i class="fas fa-skull-crosswalk" style="color:#dc2626;"></i> низкая. </span>
+        <span><i class="fas fa-microchip"></i> Сложность: <span style="color:#22c55e;">🟢 низкая</span> · <span style="color:#f97316;">🟡 средняя</span> · <span style="color:#dc2626;">🔴 высокая</span></span>
+        <span><i class="fas fa-atom"></i> PQC = Постквантовая криптография (алгоритмы, стойкие к квантовым компьютерам)</span>
+        <span><i class="fas fa-eye-slash"></i> Скроллбар скрыт CSS — прокрутка работает</span>
+    </div>
+
+    <!-- Небольшой водяной знак акцента / источник -->
+    <div style="margin-top: 1.2rem; text-align: right; font-size: 0.7rem; color: #94a3b8;">
+        <i class="fas fa-database"></i> IPFS + Helia + квантово-безопасные стратегии доступа к CID
+    </div>
+</div>
+</body>
+</html>
