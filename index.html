@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>IPFS CID: Исчерпывающее сравнение стратегий доступа, хранения и квантовой защиты (2025-2026)</title>
+    <title>IPFS CID: Comprehensive Comparison of Access, Storage, and Quantum-Safe Strategies (2025-2026)</title>
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -208,230 +208,230 @@
 <div class="container">
     <h1>
         <i class="fas fa-cubes"></i> 
-        CID в IPFS: браузерный доступ, сохранение и постквантовая защита
-        <span class="update-badge"><i class="far fa-calendar-alt"></i> апрель 2026 / актуальные решения</span>
+        CID in IPFS: Browser Access, Storage, and Post-Quantum Protection
+        <span class="update-badge"><i class="far fa-calendar-alt"></i> April 2026 / Current Solutions</span>
     </h1>
     <div class="sub">
-        <i class="fas fa-chart-line"></i> Сравнение подходов + готовые решения, сервисы и библиотеки — от публичных шлюзов до квантово-устойчивых IPNS / блокчейна.
-        <i class="fas fa-eye-slash" style="margin-left: 12px;"></i> Скроллбар скрыт, прокрутка работает.
+        <i class="fas fa-chart-line"></i> Comparison of approaches + ready-made solutions, services and libraries — from public gateways to quantum-resistant IPNS / blockchain.
+        <i class="fas fa-eye-slash" style="margin-left: 12px;"></i> Scrollbar hidden, scrolling works.
     </div>
 
     <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
-                    <th style="width: 16%"><i class="fas fa-tachometer-alt"></i> Решение</th>
-                    <th style="width: 18%"><i class="fas fa-lightbulb"></i> Ключевая идея</th>
-                    <th style="width: 20%"><i class="fas fa-tools"></i> ДОСТУПНОЕ СЕГОДНЯ РЕШЕНИЕ</th>
-                    <th style="width: 10%"><i class="fas fa-shield-alt"></i> Надёжность</th>
-                    <th style="width: 10%"><i class="fas fa-rocket"></i> Скорость / Затраты</th>
-                    <th style="width: 10%"><i class="fas fa-lock"></i> Безопасность (PQC)</th>
-                    <th style="width: 8%"><i class="fas fa-microchip"></i> Сложность</th>
-                    <th style="width: 8%"><i class="fas fa-thumbs-up"></i> Рекомендация</th>
+                    <th style="width: 16%"><i class="fas fa-tachometer-alt"></i> Solution</th>
+                    <th style="width: 18%"><i class="fas fa-lightbulb"></i> Key Idea</th>
+                    <th style="width: 20%"><i class="fas fa-tools"></i> AVAILABLE TODAY SOLUTION</th>
+                    <th style="width: 10%"><i class="fas fa-shield-alt"></i> Reliability</th>
+                    <th style="width: 10%"><i class="fas fa-rocket"></i> Speed / Costs</th>
+                    <th style="width: 10%"><i class="fas fa-lock"></i> Security (PQC)</th>
+                    <th style="width: 8%"><i class="fas fa-microchip"></i> Complexity</th>
+                    <th style="width: 8%"><i class="fas fa-thumbs-up"></i> Recommendation</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- ГРУППА 1: ПОЛУЧЕНИЕ CID ИЗ БРАУЗЕРА -->
-                <tr class="category-row"><td colspan="8"><i class="fas fa-globe icon-col"></i> <strong>I. ПОЛУЧЕНИЕ CID ИЗ ЛЮБОГО БРАУЗЕРА</strong></td></tr>
+                <!-- GROUP 1: RETRIEVING CID FROM A BROWSER -->
+                <tr class="category-row"><td colspan="8"><i class="fas fa-globe icon-col"></i> <strong>I. RETRIEVING CID FROM ANY BROWSER</strong></td></tr>
                 <tr>
-                    <td><i class="fas fa-cloud-upload-alt"></i> Публичные шлюзы (ipfs.io)</td>
-                    <td>Бесплатный доступ «из коробки» через HTTPS gateway</td>
-                    <td><span class="badge"><i class="fas fa-check-circle"></i> ipfs.io, dweb.link</span> <span class="badge">cloudflare-ipfs.com</span><br>Официальные шлюзы от Protocol Labs и Cloudflare. <a href="https://docs.ipfs.tech/reference/http/gateway/" target="_blank"><i class="fas fa-external-link-alt"></i> Документация</a></td>
-                    <td class="rating-low"><i class="fas fa-exclamation-triangle"></i> Низкая</td>
-                    <td>🟡 Средняя</td>
-                    <td>🔒 Низкая</td>
-                    <td class="complex-low"><i class="fas fa-seedling"></i> Низкая</td>
-                    <td>Только тесты / прототипы</td>
+                    <td><i class="fas fa-cloud-upload-alt"></i> Public gateways (ipfs.io)</td>
+                    <td>Free "out-of-the-box" access via HTTPS gateway</td>
+                    <td><span class="badge"><i class="fas fa-check-circle"></i> ipfs.io, dweb.link</span> <span class="badge">cloudflare-ipfs.com</span><br>Official gateways from Protocol Labs and Cloudflare. <a href="https://docs.ipfs.tech/reference/http/gateway/" target="_blank"><i class="fas fa-external-link-alt"></i> Documentation</a></td>
+                    <td class="rating-low"><i class="fas fa-exclamation-triangle"></i> Low</td>
+                    <td>🟡 Medium</td>
+                    <td>🔒 Low</td>
+                    <td class="complex-low"><i class="fas fa-seedling"></i> Low</td>
+                    <td>Only tests / prototypes</td>
                 </tr>
                 <tr>
                     <td><i class="fab fa-cloudflare"></i> Cloudflare IPFS gateway</td>
-                    <td>Глобальная CDN, высокая производительность</td>
-                    <td><span class="badge">cloudflare-ipfs.com</span><br>Бесплатный публичный шлюз с CDN-кешированием. Требует регистрации для гарантированного SLA. <a href="https://developers.cloudflare.com/web3/ipfs-gateway/" target="_blank"><i class="fas fa-external-link-alt"></i> Документация</a></td>
-                    <td class="rating-high"><i class="fas fa-check-circle"></i> Высокая</td>
-                    <td class="rating-high"><i class="fas fa-bolt"></i> Очень высокая</td>
-                    <td>🔒 Низкая (централизация)</td>
-                    <td class="complex-low">Низкая</td>
-                    <td>Быстрый доступ к публичным данным</td>
+                    <td>Global CDN, high performance</td>
+                    <td><span class="badge">cloudflare-ipfs.com</span><br>Free public gateway with CDN caching. Requires registration for guaranteed SLA. <a href="https://developers.cloudflare.com/web3/ipfs-gateway/" target="_blank"><i class="fas fa-external-link-alt"></i> Documentation</a></td>
+                    <td class="rating-high"><i class="fas fa-check-circle"></i> High</td>
+                    <td class="rating-high"><i class="fas fa-bolt"></i> Very High</td>
+                    <td>🔒 Low (centralized)</td>
+                    <td class="complex-low">Low</td>
+                    <td>Fast access to public data</td>
                 </tr>
                 <tr>
                     <td><i class="fas fa-road"></i> Trustless gateway</td>
-                    <td>Клиент проверяет хэш — исключает подмену от шлюза</td>
-                    <td><span class="badge">trustless-gateway.link</span> <span class="badge">dag.w3s.link</span> <span class="badge">w3s.link</span><br>IPFS Foundation и Web3.Storage. Поддерживают верифицируемое извлечение (car-файлы + range-запросы).<br><span class="solution-link">https://trustless-gateway.link/ipfs/{CID}</span></td>
-                    <td class="rating-high"><i class="fas fa-dice-d6"></i> Очень высокая</td>
-                    <td class="rating-high">Высокая</td>
-                    <td class="rating-high">🔒 Высокая</td>
-                    <td class="complex-mid">Средняя</td>
+                    <td>Client verifies hash — prevents gateway spoofing</td>
+                    <td><span class="badge">trustless-gateway.link</span> <span class="badge">dag.w3s.link</span> <span class="badge">w3s.link</span><br>IPFS Foundation and Web3.Storage. Support verifiable retrieval (car-files + range requests).<br><span class="solution-link">https://trustless-gateway.link/ipfs/{CID}</span></td>
+                    <td class="rating-high"><i class="fas fa-dice-d6"></i> Very High</td>
+                    <td class="rating-high">High</td>
+                    <td class="rating-high">🔒 High</td>
+                    <td class="complex-mid">Medium</td>
                     <td><span class="badge"><i class="fas fa-star"></i> Production</span></td>
                 </tr>
                 <tr>
                     <td><i class="fab fa-chrome"></i> Service Worker Gateway</td>
-                    <td>P2P напрямую из браузера без центрального сервера</td>
-                    <td><span class="badge">inbrowser.link</span> <span class="badge">Helia SW</span><br>Реализация от IPFS Foundation + ChainSafe. Автоматически подключается к сети IPFS через libp2p в браузере. <a href="https://github.com/ipfs/service-worker-gateway" target="_blank"><i class="fab fa-github"></i> Репозиторий</a><br><span class="solution-link">https://inbrowser.link/ipfs/{CID}</span></td>
-                    <td class="rating-high">Высокая</td>
-                    <td class="rating-high">Высокая</td>
-                    <td class="rating-high">🔒 Очень высокая</td>
-                    <td class="complex-high">Высокая</td>
-                    <td>Максимальная децентрализация</td>
+                    <td>P2P directly from the browser without a central server</td>
+                    <td><span class="badge">inbrowser.link</span> <span class="badge">Helia SW</span><br>Implementation by IPFS Foundation + ChainSafe. Automatically connects to the IPFS network via libp2p in the browser. <a href="https://github.com/ipfs/service-worker-gateway" target="_blank"><i class="fab fa-github"></i> Repository</a><br><span class="solution-link">https://inbrowser.link/ipfs/{CID}</span></td>
+                    <td class="rating-high">High</td>
+                    <td class="rating-high">High</td>
+                    <td class="rating-high">🔒 Very High</td>
+                    <td class="complex-high">High</td>
+                    <td>Maximum decentralization</td>
                 </tr>
                 <tr>
                     <td><i class="fas fa-brain"></i> ipfs-smart-gateway</td>
-                    <td>Автоматический failover + выбор быстрейшего шлюза</td>
-                    <td><span class="badge">public-gateway-checker</span><br>Утилиты: <a href="https://github.com/hktstyle/public-gateway-checker" target="_blank">public-gateway-checker</a>, <a href="https://github.com/ipfs/public-gateway-checker" target="_blank">JS-версия</a>. Автоматическое переключение между 20+ шлюзами.</td>
-                    <td class="rating-high">Очень высокая</td>
-                    <td class="rating-high">🚀 Максимальная</td>
-                    <td>🔒 Низкая</td>
-                    <td class="complex-mid">Средняя</td>
-                    <td>Для продакшна, где критична скорость</td>
+                    <td>Automatic failover + selection of the fastest gateway</td>
+                    <td><span class="badge">public-gateway-checker</span><br>Utilities: <a href="https://github.com/hktstyle/public-gateway-checker" target="_blank">public-gateway-checker</a>, <a href="https://github.com/ipfs/public-gateway-checker" target="_blank">JS version</a>. Automatic switching between 20+ gateways.</td>
+                    <td class="rating-high">Very High</td>
+                    <td class="rating-high">🚀 Maximum</td>
+                    <td>🔒 Low</td>
+                    <td class="complex-mid">Medium</td>
+                    <td>For production where speed is critical</td>
                 </tr>
 
-                <!-- ГРУППА 2: СОХРАНЕНИЕ CID И ДАННЫХ -->
-                <tr class="category-row"><td colspan="8"><i class="fas fa-database"></i> <strong>II. СОХРАНЕНИЕ CID (пининг, долговременность)</strong></td></tr>
+                <!-- GROUP 2: STORING CID AND DATA -->
+                <tr class="category-row"><td colspan="8"><i class="fas fa-database"></i> <strong>II. STORING CID (pinning, persistence)</strong></td></tr>
                 <tr>
-                    <td><i class="fas fa-pin"></i> Пиннинг‑сервисы</td>
-                    <td>Провайдер хранит данные на своих узлах IPFS</td>
+                    <td><i class="fas fa-pin"></i> Pinning services</td>
+                    <td>Provider stores data on their IPFS nodes</td>
                     <td>
-                        <span class="badge">Pinata</span> — 1 ГБ бесплатно, API, CDN, NFT-ориентированный <i class="fas fa-external-link-alt"></i> pinata.cloud<br>
-                        <span class="badge">Filebase</span> — enterprise, S3-совместимый API, 5 ГБ бесплатно <i class="fas fa-external-link-alt"></i> filebase.com<br>
-                        <span class="badge">Lighthouse</span> — IPFS + Filecoin, perpetual storage, шифрование <i class="fas fa-external-link-alt"></i> lighthouse.storage<br>
-                        <span class="badge">4EVERLAND</span> — pinning + хостинг фронтендов <i class="fas fa-external-link-alt"></i> 4everland.io<br>
-                        <span class="badge">IPFS.NINJA</span> — приватные шлюзы, 1 ГБ бесплатно, без API-ключа.
+                        <span class="badge">Pinata</span> — 1 GB free, API, CDN, NFT-oriented <i class="fas fa-external-link-alt"></i> pinata.cloud<br>
+                        <span class="badge">Filebase</span> — enterprise, S3-compatible API, 5 GB free <i class="fas fa-external-link-alt"></i> filebase.com<br>
+                        <span class="badge">Lighthouse</span> — IPFS + Filecoin, perpetual storage, encryption <i class="fas fa-external-link-alt"></i> lighthouse.storage<br>
+                        <span class="badge">4EVERLAND</span> — pinning + frontend hosting <i class="fas fa-external-link-alt"></i> 4everland.io<br>
+                        <span class="badge">IPFS.NINJA</span> — private gateways, 1 GB free, no API key required.
                     </td>
-                    <td class="rating-high">Высокая</td>
-                    <td>💰 Низкие затраты (есть бесплатный тариф)</td>
-                    <td>🔒 Средняя (доверие провайдеру)</td>
-                    <td class="complex-low">Низкая</td>
-                    <td>Старт проектов, малые объёмы</td>
+                    <td class="rating-high">High</td>
+                    <td>💰 Low costs (free tier available)</td>
+                    <td>🔒 Medium (trust in provider)</td>
+                    <td class="complex-low">Low</td>
+                    <td>Project startups, small volumes</td>
                 </tr>
                 <tr>
                     <td><i class="fas fa-network-wired"></i> IPFS Cluster</td>
-                    <td>Собственная сеть узлов с репликацией</td>
+                    <td>Your own network of nodes with replication</td>
                     <td>
                         <span class="badge">ipfs-cluster.org</span><br>
-                        Docker Compose для production-кластера <i class="fas fa-external-link-alt"></i> <a href="https://medium.com/coinmonks/setting-up-a-production-ready-ipfs-cluster-with-docker-compose-a-complete-guide-5180baff0b22" target="_blank">гайд</a><br>
-                        Репозиторий: <span class="solution-link">https://github.com/ipfs-cluster/ipfs-cluster</span><br>
-                        Команды: <code>ipfs-cluster-service</code> + <code>ipfs-cluster-ctl</code>
+                        Docker Compose for production cluster <i class="fas fa-external-link-alt"></i> <a href="https://medium.com/coinmonks/setting-up-a-production-ready-ipfs-cluster-with-docker-compose-a-complete-guide-5180baff0b22" target="_blank">guide</a><br>
+                        Repository: <span class="solution-link">https://github.com/ipfs-cluster/ipfs-cluster</span><br>
+                        Commands: <code>ipfs-cluster-service</code> + <code>ipfs-cluster-ctl</code>
                     </td>
-                    <td class="rating-high">🚀 Очень высокая</td>
-                    <td>💸 Высокие (обслуживание серверов)</td>
-                    <td class="rating-high">🔒 Высокая</td>
-                    <td class="complex-high">Высокая</td>
+                    <td class="rating-high">🚀 Very High</td>
+                    <td>💸 High (server maintenance)</td>
+                    <td class="rating-high">🔒 High</td>
+                    <td class="complex-high">High</td>
                     <td>Enterprise, uptime 99.99%</td>
                 </tr>
                 <tr>
                     <td><i class="fas fa-file-signature"></i> Filecoin</td>
-                    <td>Экономическое стимулирование майнеров хранить данные</td>
+                    <td>Economic incentives for miners to store data</td>
                     <td>
                         <span class="badge">Filecoin (FIL)</span><br>
-                        Инструменты: <span class="solution-link">filcdn.io</span> (CDN для retrieval), <span class="solution-link">Storacha</span>, <span class="solution-link">Curio Storage Market</span><br>
-                        Лучше использовать через обёртки: Lighthouse (автоматические сделки), NFT.Storage (deprecated, но альтернативы). <a href="https://docs.filecoin.io/" target="_blank"><i class="fas fa-external-link-alt"></i> Документация</a>
+                        Tools: <span class="solution-link">filcdn.io</span> (CDN for retrieval), <span class="solution-link">Storacha</span>, <span class="solution-link">Curio Storage Market</span><br>
+                        Best used via wrappers: Lighthouse (automatic deals), NFT.Storage (deprecated, but alternatives exist). <a href="https://docs.filecoin.io/" target="_blank"><i class="fas fa-external-link-alt"></i> Documentation</a>
                     </td>
-                    <td class="rating-high">Очень высокая</td>
-                    <td>💰💰 Высокие (плата за хранение + retrieval)</td>
-                    <td>🔒 Высокая (криптоэкономика)</td>
-                    <td class="complex-high">Высокая</td>
-                    <td>Архивы, долгосрок >5 лет</td>
+                    <td class="rating-high">Very High</td>
+                    <td>💰💰 High (storage + retrieval fees)</td>
+                    <td>🔒 High (crypto-economics)</td>
+                    <td class="complex-high">High</td>
+                    <td>Archives, long-term >5 years</td>
                 </tr>
                 <tr>
-                    <td><i class="fas fa-link"></i> Локальное хранилище +<br>CID в JSON / SQLite</td>
-                    <td>Храните хэши только у себя на диске</td>
+                    <td><i class="fas fa-link"></i> Local storage +<br>CID in JSON / SQLite</td>
+                    <td>Store hashes only on your own disk</td>
                     <td>
-                        Любая БД: SQLite, PostgreSQL, или просто <code>cid.json</code>.<br>
-                        Для автоматизации бэкапа — <code>ipfs pin remote</code> + cron.<br>
-                        Ручной экспорт CID через <code>ipfs pin ls</code>.
+                        Any DB: SQLite, PostgreSQL, or simply <code>cid.json</code>.<br>
+                        For backup automation — <code>ipfs pin remote</code> + cron.<br>
+                        Manual CID export via <code>ipfs pin ls</code>.
                     </td>
-                    <td class="rating-low">Низкая</td>
-                    <td>🟢 Нулевые</td>
-                    <td>🔒 Средняя</td>
-                    <td class="complex-low">Низкая</td>
-                    <td>Только для личного использования</td>
+                    <td class="rating-low">Low</td>
+                    <td>🟢 Zero</td>
+                    <td>🔒 Medium</td>
+                    <td class="complex-low">Low</td>
+                    <td>Only for personal use</td>
                 </tr>
 
-                <!-- ГРУППА 3: КВАНТОВО-УСТОЙЧИВАЯ ЗАЩИТА -->
-                <tr class="category-row"><td colspan="8"><i class="fas fa-atom"></i> <strong>III. ПОСТКВАНТОВАЯ УСТОЙЧИВОСТЬ (PQC) ДЛЯ CID/IPNS</strong></td></tr>
+                <!-- GROUP 3: QUANTUM-RESISTANT SECURITY -->
+                <tr class="category-row"><td colspan="8"><i class="fas fa-atom"></i> <strong>III. POST-QUANTUM RESISTANCE (PQC) FOR CID/IPNS</strong></td></tr>
                 <tr>
-                    <td><i class="fas fa-shield-virus"></i> Постквантовые подписи в IPNS</td>
-                    <td>Защита mapping «IPNS → CID» от квантовых атак на подписи</td>
+                    <td><i class="fas fa-shield-virus"></i> Post-quantum signatures in IPNS</td>
+                    <td>Protecting the "IPNS → CID" mapping against quantum attacks on signatures</td>
                     <td>
                         <span class="badge">CRYSTALS-Dilithium (ML-DSA)</span> <span class="badge">Falcon</span> <span class="badge">SPHINCS+</span><br>
-                        Экспериментальные реализации: <code>js-multiformats + pqcrypto</code>. В libp2p/Helia пока не встроено. Гибридные ключи (Ed25519 + Dilithium) — направление развития IPFS в 2025–2026.<br>
+                        Experimental implementations: <code>js-multiformats + pqcrypto</code>. Not yet built into libp2p/Helia. Hybrid keys (Ed25519 + Dilithium) — a direction for IPFS development in 2025–2026.<br>
                         <a href="https://www.npmjs.com/package/@btc-vision/post-quantum" target="_blank"><i class="fas fa-external-link-alt"></i> npm: @btc-vision/post-quantum</a>
                     </td>
-                    <td class="rating-high">Высокая</td>
-                    <td>📉 Низкая скорость, большой размер подписи</td>
-                    <td class="rating-high">🔒 Высокая</td>
-                    <td class="complex-high">Высокая</td>
-                    <td>Для данных с длительным сроком жизни (>10 лет)</td>
+                    <td class="rating-high">High</td>
+                    <td>📉 Low speed, large signature size</td>
+                    <td class="rating-high">🔒 High</td>
+                    <td class="complex-high">High</td>
+                    <td>For data with long lifetime (>10 years)</td>
                 </tr>
                 <tr>
-                    <td><i class="fas fa-blender"></i> Гибридные схемы (PQC + классика)</td>
-                    <td>Одновременная верификация Ed25519 + PQC</td>
+                    <td><i class="fas fa-blender"></i> Hybrid schemes (PQC + classic)</td>
+                    <td>Simultaneous verification of Ed25519 + PQC</td>
                     <td>
                         <span class="badge">Hybrid KEM + Signature</span><br>
-                        Актуальные исследования: NIST SP 800-227, гибридный TLS + ML-KEM (Kyber). В IPFS/lp2p — предложение по <code>hybrid_peer_id</code> (Ed25519 + ML-DSA).<br>
-                        Реализации: <span class="solution-link">libp2p + @chainsafe/libp2p-noise + hybrid КЕМ</span>.
+                        Current research: NIST SP 800-227, hybrid TLS + ML-KEM (Kyber). In IPFS/libp2p — proposal for <code>hybrid_peer_id</code> (Ed25519 + ML-DSA).<br>
+                        Implementations: <span class="solution-link">libp2p + @chainsafe/libp2p-noise + hybrid KEM</span>.
                     </td>
-                    <td class="rating-high">Очень высокая</td>
-                    <td>🟡 Средняя</td>
-                    <td class="rating-high">🔒 Высокая</td>
-                    <td class="complex-high">Высокая</td>
-                    <td><span class="badge">Прагматичный выбор</span></td>
+                    <td class="rating-high">Very High</td>
+                    <td>🟡 Medium</td>
+                    <td class="rating-high">🔒 High</td>
+                    <td class="complex-high">High</td>
+                    <td><span class="badge">Pragmatic choice</span></td>
                 </tr>
                 <tr>
-                    <td><i class="fas fa-link"></i> Блокчейн на хэш-подписях</td>
-                    <td>Регистрация CID в блокчейне, устойчивом к квантовым атакам</td>
+                    <td><i class="fas fa-link"></i> Blockchain with hash-based signatures</td>
+                    <td>Registering CID on a blockchain resistant to quantum attacks</td>
                     <td>
                         <span class="badge">QRL (Quantum Resistant Ledger)</span><br>
-                        Использует XMSS (eXtended Merkle Signature Scheme). Поддерживает хранение произвольных данных (CID). <a href="https://theqrl.org/" target="_blank"><i class="fas fa-external-link-alt"></i> theqrl.org</a><br>
-                        Альтернативы: <span class="solution-link">QRPL</span> (проект, концепция), <span class="solution-link">IOTA (Winternitz)</span>.
+                        Uses XMSS (eXtended Merkle Signature Scheme). Supports storage of arbitrary data (CID). <a href="https://theqrl.org/" target="_blank"><i class="fas fa-external-link-alt"></i> theqrl.org</a><br>
+                        Alternatives: <span class="solution-link">QRPL</span> (project, concept), <span class="solution-link">IOTA (Winternitz)</span>.
                     </td>
-                    <td class="rating-high">Максимальная</td>
-                    <td>🔴 Низкая пропускная способность</td>
-                    <td class="rating-high">🔒 Квантово-безопасно</td>
-                    <td class="complex-high">Очень высокая</td>
-                    <td>Специфичные квантово-защищённые реестры</td>
+                    <td class="rating-high">Maximum</td>
+                    <td>🔴 Low throughput</td>
+                    <td class="rating-high">🔒 Quantum-safe</td>
+                    <td class="complex-high">Very High</td>
+                    <td>Specific quantum-protected registries</td>
                 </tr>
                 <tr>
-                    <td><i class="fas fa-coins"></i> Обычный блокчейн (Ethereum, Solana) — без PQC</td>
-                    <td>Хранение CID в смарт-контракте</td>
+                    <td><i class="fas fa-coins"></i> Regular blockchain (Ethereum, Solana) — without PQC</td>
+                    <td>Storing CID in a smart contract</td>
                     <td>
                         <span class="badge">Ethereum (ECDSA)</span> <span class="badge">Solana (Ed25519)</span><br>
-                        Простые смарт-контракты на Solidity / Anchor. Для долгого хранения CID — не защищены от квантовых атак.<br>
-                        <span class="solution-link">Пример: ipfs-nft-storage</span>
+                        Simple smart contracts in Solidity / Anchor. For long-term CID storage — not protected against quantum attacks.<br>
+                        <span class="solution-link">Example: ipfs-nft-storage</span>
                     </td>
-                    <td class="rating-high">Высокая (сегодня)</td>
-                    <td>💰💰 Затраты на газ</td>
-                    <td class="rating-low">🔻 Уязвим</td>
-                    <td class="complex-mid">Средняя</td>
-                    <td>Только если миграция возможна до эры QC</td>
+                    <td class="rating-high">High (today)</td>
+                    <td>💰💰 Gas costs</td>
+                    <td class="rating-low">🔻 Vulnerable</td>
+                    <td class="complex-mid">Medium</td>
+                    <td>Only if migration is possible before the QC era</td>
                 </tr>
                 <tr>
-                    <td><i class="fas fa-box-open"></i> «Холодное» локальное хранилище (офлайн)</td>
-                    <td>CID записан на бумаге/носителе, никакой сети и криптографии</td>
+                    <td><i class="fas fa-box-open"></i> "Cold" local storage (offline)</td>
+                    <td>CID written on paper/media, no network and no cryptography</td>
                     <td>
-                        <span class="badge">QR-код на бумаге</span> <span class="badge">Vinktar (paper wallet)</span> <span class="badge">Металлическая пластина</span><br>
-                        Генерация QR-кода из CID: любой генератор QR. Печать и хранение в сейфе.<br>
-                        Программное решение: <a href="https://github.com/manaslaud/ipfs-rust" target="_blank"><i class="fab fa-github"></i> ipfs-rust</a> (офлайн-инструмент).
+                        <span class="badge">QR code on paper</span> <span class="badge">Vinktar (paper wallet)</span> <span class="badge">Metal plate</span><br>
+                        Generating QR code from CID: any QR generator. Print and store in a safe.<br>
+                        Software solution: <a href="https://github.com/manaslaud/ipfs-rust" target="_blank"><i class="fab fa-github"></i> ipfs-rust</a> (offline tool).
                     </td>
-                    <td class="rating-high">Абсолютная</td>
-                    <td>🐢 Низкая (ручной ввод)</td>
-                    <td class="rating-high">🔒 Идеальная</td>
-                    <td class="complex-low">Низкая</td>
-                    <td>Мастер-ключи, архивные бэкапы</td>
+                    <td class="rating-high">Absolute</td>
+                    <td>🐢 Low (manual entry)</td>
+                    <td class="rating-high">🔒 Perfect</td>
+                    <td class="complex-low">Low</td>
+                    <td>Master keys, archival backups</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div class="footnote">
-        <span><i class="fas fa-chart-simple"></i> Легенда: <i class="fas fa-check-circle" style="color:#16a34a;"></i> высокая, 
-        <i class="fas fa-exclamation-triangle" style="color:#eab308;"></i> средняя, <i class="fas fa-skull-crosswalk" style="color:#dc2626;"></i> низкая. </span>
-        <span><i class="fas fa-microchip"></i> Сложность: <span style="color:#22c55e;">🟢 низкая</span> · <span style="color:#f97316;">🟡 средняя</span> · <span style="color:#dc2626;">🔴 высокая</span></span>
-        <span><i class="fas fa-atom"></i> PQC = Постквантовая криптография (алгоритмы, стойкие к квантовым компьютерам)</span>
-        <span><i class="fas fa-eye-slash"></i> Скроллбар скрыт CSS — прокрутка работает</span>
+        <span><i class="fas fa-chart-simple"></i> Legend: <i class="fas fa-check-circle" style="color:#16a34a;"></i> high, 
+        <i class="fas fa-exclamation-triangle" style="color:#eab308;"></i> medium, <i class="fas fa-skull-crosswalk" style="color:#dc2626;"></i> low. </span>
+        <span><i class="fas fa-microchip"></i> Complexity: <span style="color:#22c55e;">🟢 low</span> · <span style="color:#f97316;">🟡 medium</span> · <span style="color:#dc2626;">🔴 high</span></span>
+        <span><i class="fas fa-atom"></i> PQC = Post-Quantum Cryptography (algorithms resistant to quantum computers)</span>
+        <span><i class="fas fa-eye-slash"></i> Scrollbar hidden via CSS — scrolling works</span>
     </div>
 
     <div style="margin-top: 1.2rem; text-align: right; font-size: 0.7rem; color: #94a3b8;">
-        <i class="fas fa-database"></i> IPFS + Helia + квантово-безопасные стратегии доступа к CID | <i class="far fa-clock"></i> Актуально на апрель 2026
+        <i class="fas fa-database"></i> IPFS + Helia + quantum-safe CID access strategies | <i class="far fa-clock"></i> Updated April 2026
     </div>
 </div>
 </body>
